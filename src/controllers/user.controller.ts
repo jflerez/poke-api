@@ -8,23 +8,12 @@ export class UserController {
   private userService = new UserService();
   private pokemonService = new PokemonService();
 
-  async add(req: Request, res: Response, next: NextFunction) {
-    try {
-      const authDtoData: UserCreateDto = mapper(req.body, UserCreateDto);
-      console.log("record: ", authDtoData);
-      const record = await this.userService.add(authDtoData);
-      res.send(record);
-    } catch (error) {
-      console.log("este ERROROR");
-      next(error);
-    }
-  }
   async getAll(req: Request, res: Response, next: NextFunction) {
     try {
       const records = await this.userService.getAll();
       res.send(records);
     } catch (err) {
-      console.log("este ERROROR");
+      console.log("error to get all users: ", err);
     }
   }
 
@@ -63,7 +52,7 @@ export class UserController {
 
       res.send(records);
     } catch (err) {
-      console.log("este ERROROR");
+      console.log("error to get favorites pokemons: ", err);
     }
   }
 

@@ -8,8 +8,6 @@ export class CrudRepository<T> {
   }
 
   async create(item: T) {
-    console.log("createeeeeee", item);
-    console.log("_repository", this._repository);
     return await this._repository.create(item);
   }
 

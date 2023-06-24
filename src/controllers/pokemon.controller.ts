@@ -10,7 +10,7 @@ export class PokemonController {
       const records = await this.pokemonService.getAll();
       res.send(records);
     } catch (err) {
-      console.log("este ERROROR");
+      console.log("error to get all pokemons: ", err);
     }
   }
 }

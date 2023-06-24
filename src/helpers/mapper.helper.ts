@@ -19,7 +19,6 @@ const setMapper = (source: any, destination: any) => {
 };
 
 const buildMapper = (source: any, destination: any, isRemoveEmpty = true) => {
-  console.log("destination: ", destination);
   const isDTO = destination?.prototype?.constructor.length > 0;
   const data = !isDTO
     ? setMapper(source, new destination())

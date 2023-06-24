@@ -17,10 +17,21 @@ export class AuthController {
     try {
       const authDtoData: UserCreateDto = mapper(req.body, UserCreateDto);
       console.log("record: ", authDtoData);
+
+      const user = await this.userService.findOne({
+        email: authDtoData.email,
+      });
+
+      if (user) {
+        res.status(400).json({
+          message: "Ya cuentas con una cuenta activa!",
+          success: false,
+        });
+      }
       await this.userService.add(authDtoData);
       res.send({ message: "Registro realizado exitosamente" });
     } catch (error) {
-      console.log("este ERROROR");
+      console.log("error in register: ", error);
       next(error);
     }
   }
@@ -34,7 +45,7 @@ export class AuthController {
       if (!user) {
         return res
           .status(400)
-          .json({ message: "The User does not exists", success: false });
+          .json({ message: "email o contraseña no válidos.", success: false });
       }
 
       const isMatch = await comparePassword(
@@ -51,10 +62,10 @@ export class AuthController {
 
       return res.status(400).json({
         message: "Credeciales no validas",
-        success: false
+        success: false,
       });
     } catch (error) {
-      console.log("este ERROROR");
+      console.log("error in login: ", error);
       next(error);
     }
   }

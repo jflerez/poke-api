@@ -15,7 +15,7 @@ export class UserService {
 
       return await this.repository.create(userCreate);
     } catch (error) {
-      console.log("recibiendo error service");
+      console.log("error service create user");
       return Promise.reject(error);
     }
   }
@@ -23,7 +23,7 @@ export class UserService {
     try {
       return await this.repository.findAll();
     } catch (error) {
-      console.log("recibiendo error service");
+      console.log("rerror service get user");
       return Promise.reject(error);
     }
   }
@@ -32,7 +32,7 @@ export class UserService {
     try {
       return await this.repository.findOne(query);
     } catch (error) {
-      console.log("recibiendo error service");
+      console.log("error service find one user");
       return Promise.reject(error);
     }
   }
@@ -41,7 +41,7 @@ export class UserService {
     try {
       return await this.repository.findOneById(userId);
     } catch (error) {
-      console.log("recibiendo error service");
+      console.log("rerror service find one user by id");
       return Promise.reject(error);
     }
   }
@@ -62,15 +62,19 @@ export class UserService {
   }
 
   async removeFavoritePokemon(userId: string, idPokemon: number) {
-    const user = await this.findOneById(userId);
-    console.log("user favorite:", user);
-    if (user?.favorites) {
-      const updateFavorites = user?.favorites.filter(
-        (pokemonId) => pokemonId !== idPokemon
-      );
-      user.favorites = updateFavorites;
-      await user.save();
-      return user.favorites;
+    try {
+      const user = await this.findOneById(userId);
+      console.log("user favorite:", user);
+      if (user?.favorites) {
+        const updateFavorites = user?.favorites.filter(
+          (pokemonId) => pokemonId !== idPokemon
+        );
+        user.favorites = updateFavorites;
+        await user.save();
+        return user.favorites;
+      }
+    } catch (error) {
+      return Promise.reject(error);
     }
   }
 }

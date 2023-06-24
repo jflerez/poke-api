@@ -16,7 +16,7 @@ export class ServerBoostrap implements IServerBoostrap {
           console.log("Server is running on port", config.PORT);
         })
         .on("error", (error) => {
-          console.log(error);
+          console.log("error to running server: ", error);
           reject(error);
         });
     });

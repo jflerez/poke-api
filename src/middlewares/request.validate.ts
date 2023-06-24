@@ -10,7 +10,7 @@ export function requestValidate(
     const dto = mapper(req.body, type, false);
 
     validate(dto).then((errors) => {
-      console.log("errororor: ", errors);
+      console.log("errors validation request: ", errors);
       if (errors.length > 0) {
         const validationErrors = errors.map((error) =>
           Object.values(error.constraints ? error.constraints : "").toString()

@@ -1,9 +1,6 @@
 import app from "./app";
 import { ServerBoostrap } from "./startup/server";
-import {
-  DatabaseBootstrap,
-  IDatabaseBootstrap,
-} from "./startup/database";
+import { DatabaseBootstrap, IDatabaseBootstrap } from "./startup/database";
 
 (async () => {
   const serverBootstrap = new ServerBoostrap(app);
@@ -13,6 +10,6 @@ import {
     await serverBootstrap.initialize();
     await databaseBootstrap.initialize();
   } catch (error) {
-    console.log(error);
+    console.log("error in run app: ", error);
   }
 })();
