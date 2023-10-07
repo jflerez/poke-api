@@ -13,4 +13,13 @@ export class PokemonController {
       console.log("error to get all pokemons: ", err);
     }
   }
+
+  async getTest(req: Request, res: Response, next: NextFunction) {
+    try {
+      const records = await this.pokemonService.getTest();
+      res.send(records);
+    } catch (err) {
+      console.log("error to get getTest: ", err);
+    }
+  }
 }

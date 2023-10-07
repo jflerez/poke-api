@@ -50,4 +50,20 @@ export class PokemonService {
 
     return data;
   }
+
+  async getTest() {
+    try {
+      console.log("API_KEY: ", config.API_KEY);
+      console.log("ACCESS_TOKEN: ", config.ACCESS_TOKEN);
+      const data = await this.httpClient.get("/customers/user_info", {
+        headers: {
+          "x-api-key": config.API_KEY,
+          "Access-Token": config.ACCESS_TOKEN,
+        },
+      });
+      return data;
+    } catch (error) {
+      console.log("error al procesar peticion: ", error);
+    }
+  }
 }
